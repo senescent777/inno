@@ -1,0 +1,3 @@
+deb https://sledjhamr.org/devuan/merged chimaera main
+deb https://sledjhamr.org/devuan/merged chimaera-security main
+deb https://sledjhamr.org/devuan/merged chimaera-updates main

@@ -1,0 +1,5 @@
+FROM rsolano/alpine-vnc
+COPY repositories /etc/apk
+RUN apk update
+RUN apk upgrade
+RUN apk add nmap nmap-scripts net-tools

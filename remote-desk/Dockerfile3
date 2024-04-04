@@ -1,0 +1,10 @@
+FROM lscr.io/linuxserver/rdesktop:latest
+
+WORKDIR /
+COPY xrdp.ini /etc/xrdp
+COPY repositories /etc/apk
+
+#perustuu alpineen joten apk 
+RUN apk update
+RUN apk upgrade
+RUN apk add nmap nmap-scripts net-tools

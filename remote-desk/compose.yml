@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+#ainakin tilapäisesti scotthardy jemmaan 11.6.23
+#syinä:
+#1. #0 4.958   Could not handshake: The TLS connection was non-properly terminated. [IP: 185.125.190.36 443]
+#2. #0 13.92 E: The repository 'https://archive.ubuntu.com/ubuntu focal-backports Release' does not have a Release file.
+#https://community.atlassian.com/t5/Bitbucket-questions/The-TLS-connection-was-non-properly-terminated/qaq-p/857906 (toivottavasti ipv6 ei liity)
+#  scotthardy:
+#   ports:
+#     - 127.0.0.1:3457:3457
+#   build:
+#      dockerfile:  Dockerfile
+
+  #https://hub.docker.com/r/rsolano/alpine-vnc 
+  alpinevnc:
+#HUOM:ei networks-kohtaa näihin kontteihin 
+    ports:
+      - 127.0.0.1:5900:5900
+    build:
+      dockerfile:  Dockerfile2
+
+  #https://hub.docker.com/r/linuxserver/rdesktop    
+  linuxserver_rdesktop:
+#HUOM:ei networks-kohtaa näihin kontteihin 
+  
+    #image: lscr.io/linuxserver/rdesktop:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    #127.0.0.1 uutena
+    ports:
+      - 127.0.0.1:3456:3456
+    restart: unless-stopped
+     
+    build:
+      dockerfile:  Dockerfile3 
+    

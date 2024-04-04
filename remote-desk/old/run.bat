@@ -1,0 +1,1 @@
+echo "docker run --detach --rm --hostname="$(hostname)" --publish="127.0.0.1:3456:3456/tcp" --name="remote-desktop" rrr"
