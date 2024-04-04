@@ -1,0 +1,17 @@
+FROM devuan/devuan
+WORKDIR /
+
+COPY *.deb /tmp
+RUN dpkg -i /tmp/*.deb
+RUN mkdir -p /etc/iptables
+
+#ARG CACHEBUST=1
+
+COPY rules.v6 /etc/iptables
+COPY rules.v4.stateful /etc/iptables/rules.v4
+COPY ./sources.list /etc/apt/
+
+RUN apt-get update
+RUN apt-get -y install netfilter-persistent iptables-persistent
+
+ENTRYPOINT /usr/sbin/iptables-legacy-restore /etc/iptables/rules.v4&&/bin/bash

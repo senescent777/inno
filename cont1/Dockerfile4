@@ -1,0 +1,8 @@
+FROM devuan/devuan
+WORKDIR /
+COPY *.deb /tmp
+RUN dpkg -i /tmp/*.deb
+RUN mkdir -p /etc/iptables
+COPY ./sources.list /etc/apt/
+RUN apt-get update
+RUN apt-get -y install netfilter-persistent iptables-persistent
