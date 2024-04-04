@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  #Devuan+nmap
+  cont1:
+    networks:
+      - inno-net2 
+    entrypoint:  /bin/bash 
+    build:
+      context:  cont1
+      dockerfile:  Dockerfile
+  cont5:
+    networks:
+      - inno-net2
+    cap_add:  
+      - NET_ADMIN
+    build:
+      context:  cont1
+      dockerfile:  Dockerfile2
+  cont6:
+    networks:
+      - inno-net2
+    cap_add:  
+      - NET_ADMIN
+    build:
+      context:  cont1
+      dockerfile:  Dockerfile3
+  #Alpine+nmap    
+  cont3:
+    depends_on:
+        - cont5
+        - cont6
+        - cont1
+    networks:
+      - inno-net2
+    build:
+      context:  cont3
+      dockerfile:  Dockerfile
+networks:
+  inno-net2:
+    external:  true
+
