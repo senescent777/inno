@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  kali2:
+    networks:
+      - inno-net2
+    cap_add:  
+      - NET_ADMIN
+    build:
+      dockerfile:  Dockerfile
+  
+  kali3:
+    networks:
+      - inno-net2
+    
+    cap_add:  
+      - NET_ADMIN
+    
+    ports:
+      - 127.0.0.1:3456:3456
+    
+    environment: 
+      USER:  kali
+      PASSWORD:  kali
+      
+    build:
+      dockerfile:  Dockerfile2
+
+networks:
+  inno-net2:    
+    external:  true

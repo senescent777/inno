@@ -1,0 +1,16 @@
+FROM heywoodlh/rdp-kali-linux
+WORKDIR /
+
+#rem "https://hub.docker.com/r/heywoodlh/rdp-kali-linux-full ?"
+RUN mkdir -p /tmp/deb
+COPY xrdp.ini /etc/xrdp
+COPY ./sources.list /etc/apt/
+COPY *.deb /tmp/deb
+RUN dpkg -i /tmp/deb/*.deb
+
+#HUOM. joutaa konffata aptia ennenqu asentaa:zenmap
+#kts myos:https://github.com/heywoodlh/dockerfiles/tree/master/rdp-kali-linux
+
+#13-6-23  oli kokeeksi mukana nmap-scripts, ei löytynyt paketeista
+RUN apt-get update \
+    && DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends kali-linux-headless nmap net-tools

@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+
+  kasmweb:
+    image: kasmweb/kali-rolling-desktop:1.13.0
+    ports:
+      - 127.0.0.1:6901:6901
+    environment:  
+      VNC_PW:  password
+
+networks:
+  net2:
+    driver:  bridge
+    internal:  true
