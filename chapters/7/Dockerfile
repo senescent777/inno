@@ -1,1 +1,0 @@
-#FROM mjkaye/bind9-alpine
