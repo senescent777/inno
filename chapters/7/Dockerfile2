@@ -1,0 +1,7 @@
+FROM corpusops/sshd:latest-no-squash
+WORKDIR /
+
+COPY ./sshd_config.2 /etc/ssh/sshd_config
+COPY ./sshd_config.2 /etc/ssh/sshd_config.in
+
+RUN chmod 0644 /etc/ssh/sshd_config*

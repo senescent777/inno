@@ -1,0 +1,29 @@
+SyslogFacility LOCAL0
+LogLevel INFO
+
+PermitRootLogin prohibit-password
+AuthorizedKeysFile	.ssh/authorized_keys /etc/authorized_keys/%u
+
+
+
+#AllowAgentForwarding yes
+#AllowTcpForwarding  yes
+#GatewayPorts yes
+#X11Forwarding yes
+PermitTTY yes
+TCPKeepAlive yes
+
+
+
+Subsystem	sftp	/usr/lib/ssh/sftp-server
+
+
+Port 8080
+
+HostKey /etc/ssh/keys/ssh_host_rsa_key
+HostKey /etc/ssh/keys/ssh_host_dsa_key
+HostKey /etc/ssh/keys/ssh_host_ecdsa_key
+HostKey /etc/ssh/keys/ssh_host_ed25519_key
+
+Match Group viakey
+    PasswordAuthentication no

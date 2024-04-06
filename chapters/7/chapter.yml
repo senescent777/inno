@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+#resystit/bind9 ei oikein lähtenyt jostain syystä...
+#  #HUOM.(patricol/alpine-sshd) myös rikkoi koko purkkavirityksen vähän väliä niin mennään vain 2 skannattavalla
+  chapter7_2: 
+    networks:
+      - inno-net2
+
+    build:
+      dockerfile: Dockerfile2
+
+  chapter7_3:
+    #nginx
+    networks:
+      - inno-net2
+    image:  nginx
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf       
+  chapter7_4:
+    #skannaa
+    networks:
+      - inno-net2
+    entrypoint:  /sbin/init 2
+    build:
+      context:  ../../cont3
+      dockerfile:  Dockerfile
+      
+networks:
+  inno-net2:    
+    external:  true
